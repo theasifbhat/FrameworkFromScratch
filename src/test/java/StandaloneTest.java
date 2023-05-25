@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class StandaloneTest {
- public static void main(String[] args) throws InterruptedException {
+ public static void main(String[] args) {
 
 
   WebDriverManager.chromedriver().setup();
