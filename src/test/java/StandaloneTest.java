@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageObjects.LandingPage;
+import pageObjects.ProjectCatalogue;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -17,45 +20,26 @@ public class StandaloneTest {
   WebDriver mDriver = new ChromeDriver();
   mDriver.manage().window().maximize();
   mDriver.get("https://rahulshettyacademy.com/client/");
-  WebElement usernameField= mDriver.findElement(By.id("userEmail"));
-  WebElement passwordField= mDriver.findElement(By.id("userPassword"));
-  WebElement loginButton= mDriver.findElement(By.id("login"));
+  WebDriverWait wait = new WebDriverWait(mDriver,Duration.ofSeconds(6));
+
   By cartButton = By.xpath("//button[@routerlink='/dashboard/cart']");
   By cartPageItemName = By.cssSelector(".cartSection h3");
-  String itemName;
+  String itemName = "ZARA COAT 3";
+
+  LandingPage landingPage= new LandingPage(mDriver);
+  landingPage.setUsernameFieldText("rahulrider@shetty.com");
+  landingPage.setPasswordFieldText("Test@123");
+  landingPage.clickOnLogin();
+
+  ProjectCatalogue projectCatalogue = new ProjectCatalogue(mDriver);
+  projectCatalogue.addProductToCart(itemName);
 
 
-  usernameField.sendKeys("rahulrider@shetty.com");
-  passwordField.sendKeys("Test@123");
-  loginButton.click();
-
-
-  WebDriverWait wait = new WebDriverWait(mDriver, Duration.ofSeconds(8));
-  wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".container")));
-
-//gets all products on homepage
-  List<WebElement> products = mDriver.findElements(By.cssSelector(".card"));
-
-  //stores a product with name zara among all products
-  WebElement selectedProduct  = products.stream()
-          .filter(it-> it.findElement(By.cssSelector("b"))
-          .getText()
-          .toLowerCase()
-          .contains("zara coat"))
-          .findFirst()
-          .orElse(null);
-
-  itemName= selectedProduct.getText().split("\\$")[0].trim();
-  selectedProduct.findElement(By.cssSelector(".card-body button:last-of-type")).click();
-
-//click on cart button when the item is added to cart
-  wait.until(ExpectedConditions.elementToBeClickable(By.id("toast-container")));
-  wait.until(ExpectedConditions.invisibilityOf(mDriver.findElement(By.cssSelector("div[class*='ng-animating']"))));
-  mDriver.findElement(cartButton).click();
 
   //check if the item is present in the cart
+  mDriver.findElement(cartButton).click();
   wait.until(ExpectedConditions.elementToBeClickable(cartPageItemName));
-  boolean isFound = mDriver.findElements(cartPageItemName).stream().anyMatch(it->it.getText().equals(itemName));
+  boolean isFound = mDriver.findElements(cartPageItemName).stream().anyMatch(it->it.getText().contains(itemName));
   Assert.assertTrue(isFound);
 
   //click on checkout and enter the details
