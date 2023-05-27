@@ -30,8 +30,9 @@ public void setPasswordFieldText(String password){
     passwordField.sendKeys(password);
 }
 
-public void clickOnLogin(){
+public ProjectCatalogue clickOnLogin(){
     loginButton.click();
+    return new ProjectCatalogue(mDriver);
 }
 
 

@@ -17,7 +17,7 @@ public class ProjectCatalogue extends AbstractComponent {
     @FindBy(css = "div[class*='ng-animating']")
     WebElement spinner;
 
-    By productsLocator = By.cssSelector(".card");
+    By productsLocator = By.cssSelector(".mb-3");
     By addToCartLocator = By.cssSelector(".card-body button:last-of-type");
 
     By addedToCartToastLocator = By.id("toast-container");
@@ -32,7 +32,7 @@ public class ProjectCatalogue extends AbstractComponent {
 
 
     public List<WebElement> getAllProducts() {
-        waitTillElementVisible(addToCartLocator);
+        waitTillElementVisible(productsLocator);
         return products;
     }
 
