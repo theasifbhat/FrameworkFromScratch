@@ -35,6 +35,10 @@ public ProjectCatalogue clickOnLogin(){
     return new ProjectCatalogue(mDriver);
 }
 
+public void goToLandingPage(){
+    mDriver.get("https://rahulshettyacademy.com/client/");
+}
+
 
 
 }
