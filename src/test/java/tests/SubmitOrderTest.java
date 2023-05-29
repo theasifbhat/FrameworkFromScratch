@@ -1,8 +1,10 @@
+package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
 import testingComponents.BaseTest;
+
 
 public class SubmitOrderTest extends BaseTest {
 
@@ -10,7 +12,6 @@ public class SubmitOrderTest extends BaseTest {
  public void checkOrderWorkingTest() {
 
   String itemName = "ZARA COAT 3";
-  LandingPage landingPage= launchApplication();
   landingPage.setUsernameFieldText("rahulrider@shetty.com");
   landingPage.setPasswordFieldText("Test@123");
 
@@ -26,7 +27,6 @@ public class SubmitOrderTest extends BaseTest {
 
   System.out.println("Order number is: "+conformationPage.getOrderNumber());
   Assert.assertEquals(conformationPage.getOrderMessage(), "THANKYOU FOR THE ORDER.");
-  mDriver.close();
 
  }
 }

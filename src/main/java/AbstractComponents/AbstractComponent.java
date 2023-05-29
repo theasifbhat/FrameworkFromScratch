@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
+import pageObjects.MyOrdersPage;
 
 import java.time.Duration;
 
@@ -16,10 +17,11 @@ public class AbstractComponent {
     WebDriver mDriver;
     WebDriverWait webDriverWait;
 
-
-
     @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
     WebElement cartButton;
+
+    @FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
+    WebElement myCartButton;
 
 
     public AbstractComponent(WebDriver mDriver) {
@@ -36,9 +38,19 @@ public class AbstractComponent {
         webDriverWait.until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public void waitTillElementVisibleUsingWebElement(WebElement element){
+        webDriverWait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public CartPage clickOnCartButton(){
         cartButton.click();
         return new CartPage(mDriver);
+    }
+
+    public MyOrdersPage clickOnMyOrdersButton(){
+        waitTillElementVisibleUsingWebElement(myCartButton);
+        myCartButton.click();
+        return new MyOrdersPage(mDriver);
     }
 
 

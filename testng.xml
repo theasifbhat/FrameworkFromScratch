@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Rahul Shetty eCommerece">
+    <test name="Landing Page Tests">
+        <classes>
+            <class name="tests.LandingPage.LandingPageTests"/>
+        </classes>
+    </test>
+
+    <test name="Flow Tests">
+        <classes>
+            <class name="tests.SubmitOrderTest"/>
+        </classes>
+    </test>
+
+    <test name="My Orders Tests">
+        <classes >
+            <class name="tests.MyOrdersPage.MyOrdersPageTests"/>
+        </classes>
+    </test>
+
+</suite>

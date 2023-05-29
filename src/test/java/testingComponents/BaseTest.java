@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import pageObjects.LandingPage;
 
 import java.io.FileInputStream;
@@ -15,6 +17,7 @@ import java.util.Properties;
 public class BaseTest {
 
     public WebDriver mDriver;
+    public LandingPage landingPage;
     public WebDriver initializeDriver(){
 
         //used to get the properties file to read data
@@ -53,11 +56,18 @@ public class BaseTest {
         return mDriver;
     }
 
+    @BeforeMethod
     public LandingPage launchApplication(){
         mDriver = initializeDriver();
-        LandingPage landingPage= new LandingPage(mDriver);
+        landingPage= new LandingPage(mDriver);
         landingPage.goToLandingPage();
         return landingPage;
+    }
+
+
+    @AfterMethod
+    public void tearDown(){
+        mDriver.close();
     }
 
 

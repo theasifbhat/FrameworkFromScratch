@@ -1,6 +1,5 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +16,9 @@ public class LandingPage {
     @FindBy(id = "login")
     WebElement loginButton;
 
+    @FindBy(css = ".invalid-feedback")
+    WebElement errorMessageForEmptyField;
+
 public LandingPage(WebDriver mDriver){
     this.mDriver= mDriver;
     PageFactory.initElements(mDriver,this);
@@ -28,6 +30,12 @@ public void setUsernameFieldText(String username) {
 
 public void setPasswordFieldText(String password){
     passwordField.sendKeys(password);
+}
+
+
+
+public String getErrorMessageFromEmptyUserField(){
+    return errorMessageForEmptyField.getText();
 }
 
 public ProjectCatalogue clickOnLogin(){
