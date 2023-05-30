@@ -3,7 +3,6 @@ package testingComponents;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -11,7 +10,6 @@ import org.testng.annotations.BeforeMethod;
 import pageObjects.LandingPage;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTest {
@@ -22,7 +20,6 @@ public class BaseTest {
 
         //used to get the properties file to read data
         String browserName="";
-        String headLessMode= "";
 
         try{
         Properties properties = new Properties();
