@@ -10,7 +10,7 @@
 
     <test name="Flow Tests">
         <classes>
-            <class name="tests.SubmitOrderTest"/>
+            <class name="tests.CheckoutPage.CheckoutPageTests"/>
         </classes>
     </test>
 
