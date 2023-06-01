@@ -1,6 +1,9 @@
 package testingComponents;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -9,7 +12,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pageObjects.LandingPage;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTest {
@@ -54,11 +59,11 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public LandingPage launchApplication(){
+    public void launchApplication(){
         mDriver = initializeDriver();
         landingPage= new LandingPage(mDriver);
         landingPage.goToLandingPage();
-        return landingPage;
+       // return landingPage;
     }
 
 

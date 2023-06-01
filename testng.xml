@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Rahul Shetty eCommerece">
-    <test name="Landing Page Tests">
+<suite name="Rahul Shetty eCommerece" >
+    <listeners>
+        <listener class-name="testingComponents.Listeners"/>
+    </listeners>
+    <test name="Landing Page Tests" >
         <classes>
             <class name="tests.LandingPage.LandingPageTests"/>
         </classes>
