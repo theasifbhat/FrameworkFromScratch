@@ -13,9 +13,9 @@ public class UtilityMethods {
     public static String saveScreenshotAndReturnPath(String fileName, WebDriver driver)  throws IOException {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        File dest = new File(System.getProperty("user.dir")+"//reports//"+fileName+".png");
+        File dest = new File(System.getProperty("user.dir")+"\\reports\\"+fileName+".png");
         FileUtils.copyFile(source,dest);
-        return System.getProperty("user.dir")+"//reports//"+ fileName+".png";
+        return System.getProperty("user.dir")+"\\reports\\"+ fileName+".png";
 
     }
 

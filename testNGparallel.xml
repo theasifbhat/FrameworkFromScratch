@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Rahul Shetty eCommerece" parallel="tests" >
+    <listeners>
+        <listener class-name="testingComponents.Listeners"/>
+    </listeners>
+    <test name="Landing Page Tests" thread-count="5" >
+        <classes>
+            <class name="tests.LandingPage.LandingPageTests"/>
+        </classes>
+    </test>
+
+    <test name="Flow Tests" thread-count="5">
+        <classes>
+            <class name="tests.CheckoutPage.CheckoutPageTests"/>
+        </classes>
+    </test>
+
+    <test name="My Orders Tests" thread-count="5">
+        <classes >
+            <class name="tests.MyOrdersPage.MyOrdersPageTests"/>
+        </classes>
+    </test>
+
+</suite>

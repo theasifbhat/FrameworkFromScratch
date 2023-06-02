@@ -14,10 +14,15 @@ public class Listeners implements ITestListener {
     ExtentReports extentReport = ExtentReporterUtility.getExtentReportsObject();
     ExtentTest test;
 
+
+    ThreadLocal<ExtentTest> threadLocal = new ThreadLocal<ExtentTest>();
+    // for thread safe operations, test(ExtentTest) object with replace threadLocal.get()
+
     @Override
     public void onTestStart(ITestResult result) {
         System.out.println("Test Started");
-        test = extentReport.createTest(result.getMethod().getMethodName());
+        test=extentReport.createTest(result.getMethod().getMethodName());
+        threadLocal.set(test);
     }
 
     @Override
@@ -32,7 +37,7 @@ public class Listeners implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test.fail(result.getThrowable());
+        threadLocal.get().fail(result.getThrowable());  // replaced test with threadLocal.get() for thread safety
         WebDriver driver;
         String filePath="";
         try{
@@ -43,9 +48,7 @@ public class Listeners implements ITestListener {
         catch (Exception e){
             e.printStackTrace();
         }
-
-
-        test.addScreenCaptureFromPath(filePath,result.getMethod().getMethodName());
+        threadLocal.get().addScreenCaptureFromPath(filePath,result.getMethod().getMethodName()); // replaced test with threadLocal.get() for thread safety
 
 
     }
