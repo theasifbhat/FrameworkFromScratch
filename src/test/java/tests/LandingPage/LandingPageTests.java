@@ -10,7 +10,7 @@ public class LandingPageTests extends BaseTest {
 public void testForCheckingLoginWithEmptyUsername(){
     landingPage.setPasswordFieldText("helloWorld");
     landingPage.clickOnLogin();
-    Assert.assertEquals(landingPage.getErrorMessageFromEmptyUserField(),"*Email is not required");
+    Assert.assertEquals(landingPage.getErrorMessageFromEmptyUserField(),"*Email is required");
 }
 
 

@@ -2,6 +2,7 @@ package testingComponents;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -40,29 +41,27 @@ public class BaseTest {
 
         }
 
-        switch (browserName){
-
-            case "firefox":{
+        switch (browserName) {
+            case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 System.out.println("firefox is selected");
-                mDriver=new FirefoxDriver();
-                break;
+                mDriver = new FirefoxDriver();
+                mDriver.manage().window().setSize(new Dimension(1440,900));
             }
-
-            case "edge":{
+            case "edge" -> {
                 WebDriverManager.edgedriver().setup();
                 System.out.println("edge is selected");
-                mDriver= new EdgeDriver();
-                break;
+                mDriver = new EdgeDriver();
+                mDriver.manage().window().setSize(new Dimension(1440,900));
             }
-
-            default: {
+            default -> {
                 WebDriverManager.chromedriver().setup();
                 System.out.println("default/chrome is selected");
                 mDriver = new ChromeDriver();
-                break;
+                mDriver.manage().window().setSize(new Dimension(1440,900));
             }
         }
+
         mDriver.manage().window().maximize();
         return mDriver;
     }
