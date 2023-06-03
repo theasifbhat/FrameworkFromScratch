@@ -30,10 +30,13 @@ public class BaseTest {
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\resources\\GlobalData.properties");
         properties.load(fileInputStream);
-        browserName = properties.getProperty("browser");
+        browserName = System.getProperty("browser") !=null ? System.getProperty("browser"):  properties.getProperty("browser");
+
+        System.out.println("Received browser: "+browserName);
+        // System.getProperty("browser") is set when calling test with command prompt using maven
 
         }
-        catch (Exception e){
+        catch (Exception ignored){
 
         }
 
@@ -41,17 +44,23 @@ public class BaseTest {
 
             case "firefox":{
                 WebDriverManager.firefoxdriver().setup();
+                System.out.println("firefox is selected");
                 mDriver=new FirefoxDriver();
+                break;
             }
 
             case "edge":{
                 WebDriverManager.edgedriver().setup();
+                System.out.println("edge is selected");
                 mDriver= new EdgeDriver();
+                break;
             }
 
             default: {
                 WebDriverManager.chromedriver().setup();
+                System.out.println("default/chrome is selected");
                 mDriver = new ChromeDriver();
+                break;
             }
         }
         mDriver.manage().window().maximize();
