@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.CartPage;
 import pageObjects.MyOrdersPage;
@@ -51,6 +52,20 @@ public class AbstractComponent {
         waitTillElementVisibleUsingWebElement(myCartButton);
         myCartButton.click();
         return new MyOrdersPage(mDriver);
+    }
+
+    public void selectFromDropDown(WebElement dropdown, String option){
+        Select select = new Select(dropdown);
+        select.getOptions().forEach(it-> System.out.println("item is + "+it.getText()));
+        if (select.getOptions().stream()
+                .anyMatch(it->it.getText().equalsIgnoreCase(option))){
+            select.selectByVisibleText(option);
+        }
+        else {
+            System.out.println("option not found");
+            //throw new RuntimeException("Option not found in dropdown");
+        }
+
     }
 
 

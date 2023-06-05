@@ -16,6 +16,9 @@ public class LandingPage {
     @FindBy(id = "login")
     WebElement loginButton;
 
+    @FindBy(css = "a[routerLink='/auth/register']")
+    WebElement registerButton;
+
     @FindBy(css = ".invalid-feedback")
     WebElement errorMessageForEmptyField;
 
@@ -46,6 +49,11 @@ public ProjectCatalogue clickOnLogin(){
 public void goToLandingPage(){
     mDriver.get("https://rahulshettyacademy.com/client/");
 }
+
+public RegisterPage clickOnRegisterationButton(){
+    registerButton.click();
+    return new RegisterPage(mDriver);
+    }
 
 
 
