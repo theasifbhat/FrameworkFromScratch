@@ -1,10 +1,7 @@
 package testingComponents;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,32 +12,29 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pageObjects.LandingPage;
-
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTest {
 
     public WebDriver mDriver;
     public LandingPage landingPage;
-    public WebDriver initializeDriver(){
+
+    public WebDriver initializeDriver() {
 
         //used to get the properties file to read data
-        String browserName="";
+        String browserName = "";
 
-        try{
-        Properties properties = new Properties();
-        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\resources\\GlobalData.properties");
-        properties.load(fileInputStream);
-        browserName = System.getProperty("browser") !=null ? System.getProperty("browser"):  properties.getProperty("browser");
+        try {
+            Properties properties = new Properties();
+            FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\GlobalData.properties");
+            properties.load(fileInputStream);
+            browserName = System.getProperty("browser") != null ? System.getProperty("browser") : properties.getProperty("browser");
 
-        System.out.println("Received browser: "+browserName);
-        // System.getProperty("browser") is set when calling test with command prompt using maven
+            System.out.println("Received browser: " + browserName);
+            // System.getProperty("browser") is set when calling test with command prompt using maven
 
-        }
-        catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
 
@@ -56,7 +50,7 @@ public class BaseTest {
                 FirefoxOptions options = new FirefoxOptions();
                 options.addArguments("--headless");
                 mDriver = new FirefoxDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440,900));
+                mDriver.manage().window().setSize(new Dimension(1440, 900));
             }
             case "edge" -> {
                 WebDriverManager.edgedriver().setup();
@@ -69,7 +63,7 @@ public class BaseTest {
                 EdgeOptions options = new EdgeOptions();
                 options.addArguments("--headless");
                 mDriver = new EdgeDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440,900));
+                mDriver.manage().window().setSize(new Dimension(1440, 900));
             }
             case "chromeHeadless" -> {
                 WebDriverManager.chromedriver().setup();
@@ -77,7 +71,7 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
                 mDriver = new ChromeDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440,900));
+                mDriver.manage().window().setSize(new Dimension(1440, 900));
             }
             default -> {
                 WebDriverManager.chromedriver().setup();
@@ -91,17 +85,27 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void launchApplication(){
+    public void launchApplication() {
         mDriver = initializeDriver();
-        landingPage= new LandingPage(mDriver);
+        landingPage = new LandingPage(mDriver);
         landingPage.goToLandingPage();
-       // return landingPage;
+        // return landingPage;
     }
 
 
     @AfterMethod
-    public void tearDown(){
-        mDriver.close();
+    public void tearDown() {
+        try {
+            if (mDriver != null) {
+                mDriver.quit();
+                System.out.println("Driver is closed ");
+            } else {
+                System.out.println("Driver is null ");
+            }
+        } catch (Exception e) {
+            // Log or handle the exception appropriately
+            System.out.println("Exception occurred while closing the browser: " + e.getMessage());
+        }
     }
 
 

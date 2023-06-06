@@ -16,7 +16,7 @@ public class MyOrdersPageTests extends BaseTest {
 
     //this test depends upon the checkOrderWorkingTest() test from SubmitOrderTestClass
     //need to apply depends on annotation on this test method.
- @Test(dataProviderClass = DataProviders.class, dataProvider = "getDataWithJson")
+ @Test(dataProviderClass = DataProviders.class, dataProvider = "getDataWithJson" ,dependsOnMethods = "")
     public void checkIfOrderedItemIsPresentInMyOrders(HashMap<String,String> map){
     landingPage.setUsernameFieldText(map.get("username"));
     landingPage.setPasswordFieldText(map.get("password"));
