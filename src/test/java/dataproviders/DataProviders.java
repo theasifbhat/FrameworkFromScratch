@@ -32,11 +32,6 @@ public class DataProviders {
     public Object[][] getDataWithJson() {
         List<HashMap<String, String>> data = getJsonDataToMap("//src//test//java//JSONObjects//data.json");
         return convertListTo2DArray(data);
-
-
-        //  return new Object[][] { {data.get(0)},{data.get(1)},{data.get(2)}};
-        //needs to replaced with better code,
-        //     return getJsonDataToMap("//src//test//java//JSONObjects//data.json");
     }
 
 
