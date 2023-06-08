@@ -23,8 +23,8 @@ public class RegisterPageTests extends BaseTest {
         registerPage.setUserMobileFieldText("1234567890");
         registerPage.setOccupationDropDown("Student");
         registerPage.setMaleRadioButton();
-        registerPage.setPasswordFieldText("123456");
-        registerPage.setConfirmPasswordFieldText("123456");
+        registerPage.setPasswordFieldText("12345678");
+        registerPage.setConfirmPasswordFieldText("12345678");
         registerPage.setTermsAndConditionsCheckbox();
         registerPage.clickOnRegisterButton();
         // need to work fro, here

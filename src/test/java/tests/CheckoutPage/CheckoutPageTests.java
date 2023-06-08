@@ -17,7 +17,7 @@ public class CheckoutPageTests extends BaseTest {
   landingPage.setUsernameFieldText(map.get("username"));
   landingPage.setPasswordFieldText(map.get("password"));
 
-  ProjectCatalogue projectCatalogue = landingPage.clickOnLogin();
+  ProductCatalogue projectCatalogue = landingPage.clickOnLogin();
   projectCatalogue.addProductToCart(map.get("itemName"));
 
   CartPage cartPage=projectCatalogue.clickOnCartButton();

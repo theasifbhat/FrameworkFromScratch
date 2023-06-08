@@ -27,7 +27,7 @@ public class AbstractComponent {
 
     public AbstractComponent(WebDriver mDriver) {
         this.mDriver = mDriver;
-        webDriverWait = new WebDriverWait(mDriver, Duration.ofSeconds(6));
+        webDriverWait = new WebDriverWait(mDriver, Duration.ofSeconds(10));
         PageFactory.initElements(mDriver,this);
     }
 
@@ -42,6 +42,12 @@ public class AbstractComponent {
     public void waitTillElementVisibleUsingWebElement(WebElement element){
         webDriverWait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public void waitTillElementIsPresent(By locator){
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+
 
     public CartPage clickOnCartButton(){
         cartButton.click();

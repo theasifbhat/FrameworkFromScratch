@@ -11,7 +11,7 @@ import static helpers.JsonHandler.getJsonDataToMap;
 public class DataProviders {
     //data providers can be used in two ways
     @DataProvider
-    public Object[][] getData() {
+    public Object[][] getSingleCredentials() {
         return new Object[][]{{"rahulrider@shetty.com", "Test@123", "ZARA COAT 3", "India"}};
     }
 

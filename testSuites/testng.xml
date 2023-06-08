@@ -23,4 +23,16 @@
         </classes>
     </test>
 
+    <test name="products catalogue tests">
+        <classes>
+            <class name="tests.productCatalogue.ProductCatalogueTests"/>
+        </classes>
+    </test>
+
+    <test name="register page tests">
+        <classes>
+            <class name="tests.registerPage.RegisterPageTests"/>
+        </classes>
+    </test>
+
 </suite>

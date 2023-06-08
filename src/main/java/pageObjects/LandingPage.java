@@ -41,9 +41,9 @@ public String getErrorMessageFromEmptyUserField(){
     return errorMessageForEmptyField.getText();
 }
 
-public ProjectCatalogue clickOnLogin(){
+public ProductCatalogue clickOnLogin(){
     loginButton.click();
-    return new ProjectCatalogue(mDriver);
+    return new ProductCatalogue(mDriver);
 }
 
 public void goToLandingPage(){
@@ -53,7 +53,14 @@ public void goToLandingPage(){
 public RegisterPage clickOnRegisterationButton(){
     registerButton.click();
     return new RegisterPage(mDriver);
-    }
+}
+
+public ProductCatalogue loginWithCredentials(String username, String password){
+    setUsernameFieldText(username);
+    setPasswordFieldText(password);
+    clickOnLogin();
+    return new ProductCatalogue(mDriver);
+}
 
 
 
