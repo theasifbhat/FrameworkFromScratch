@@ -23,12 +23,31 @@ public class ProductCatalogueTests extends BaseTest {
     allItems.forEach(item->{
         String sanitizedItemName= item.getText().split("\\$")[0].trim();
         System.out.println("item san:"+sanitizedItemName);
-        if (!sanitizedItemName.equalsIgnoreCase(itemName)){
+        if (!sanitizedItemName.contains(itemName)){
             Assert.fail("Item not found: "+sanitizedItemName);
         }
     });
-
-
-
 }
+
+
+    @Test ( dataProviderClass = DataProviders.class, dataProvider = "getSingleCredentials")
+    public void testMinMaxPriceFilter(String username, String password, String itemName, String country) throws InterruptedException {
+        String minPrice="231500";
+        String maxPrice="231500";
+
+        ProductCatalogue productCatalogue=  landingPage.loginWithCredentials(username,password);
+      productCatalogue.setMinMaxPrice(minPrice,maxPrice);
+
+      List<WebElement> items = productCatalogue.getAllProducts();
+      Thread.sleep(1000);  /// causes stale element exception if not used
+      items.forEach(item->{
+          String price = item.findElement(productCatalogue.priceLocator).getText().split("\\$")[1].trim().split("View")[0].trim();
+          if (!(Integer.parseInt(price)>= Integer.parseInt(minPrice) && Integer.parseInt(price)<=Integer.parseInt(maxPrice))){
+              Assert.fail("Price is not in range: "+price);
+          }
+      });
+
+    }
+
+
 }
