@@ -25,6 +25,8 @@ public class BaseTest {
         //used to get the properties file to read data
         String browserName = "";
 
+        WebDriver driver;
+
         try {
             Properties properties = new Properties();
             FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\resources\\GlobalData.properties");
@@ -42,46 +44,46 @@ public class BaseTest {
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
                 System.out.println("firefox is selected");
-                mDriver = new FirefoxDriver();
+                driver = new FirefoxDriver();
             }
             case "firefoxHeadless" -> {
                 WebDriverManager.firefoxdriver().setup();
                 System.out.println("firefox headless is selected");
                 FirefoxOptions options = new FirefoxOptions();
                 options.addArguments("--headless");
-                mDriver = new FirefoxDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440, 900));
+                driver = new FirefoxDriver(options);
+                driver.manage().window().setSize(new Dimension(1440, 900));
             }
             case "edge" -> {
                 WebDriverManager.edgedriver().setup();
                 System.out.println("edge is selected");
-                mDriver = new EdgeDriver();
+                driver = new EdgeDriver();
             }
             case "edgeHeadless" -> {
                 WebDriverManager.edgedriver().setup();
                 System.out.println("edge headless is selected");
                 EdgeOptions options = new EdgeOptions();
                 options.addArguments("--headless");
-                mDriver = new EdgeDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440, 900));
+                driver = new EdgeDriver(options);
+                driver.manage().window().setSize(new Dimension(1440, 900));
             }
             case "chromeHeadless" -> {
                 WebDriverManager.chromedriver().setup();
                 System.out.println("chrome is selected");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
-                mDriver = new ChromeDriver(options);
-                mDriver.manage().window().setSize(new Dimension(1440, 900));
+                driver = new ChromeDriver(options);
+                driver.manage().window().setSize(new Dimension(1440, 900));
             }
             default -> {
                 WebDriverManager.chromedriver().setup();
                 System.out.println("default/chrome is selected");
-                mDriver = new ChromeDriver();
+                driver = new ChromeDriver();
             }
         }
 
-        mDriver.manage().window().maximize();
-        return mDriver;
+        driver.manage().window().maximize();
+        return driver;
     }
 
     @BeforeMethod
